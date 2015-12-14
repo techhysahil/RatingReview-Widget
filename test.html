@@ -302,31 +302,40 @@
                 background-color: #cbcbcb;
                 border-radius: 5px;
             }
-            .rating_star_holder .star:nth-child(1).active{
+            .rating_star_holder .star:nth-child(1).active,
+            .rating_star_holder .star:nth-child(1).selected{
                 background-color: #cb202d;
             }
-            .rating_star_holder .star:nth-child(2).active{
+            .rating_star_holder .star:nth-child(2).active,
+            .rating_star_holder .star:nth-child(2).selected{
                 background-color: #de1d0f;
             }
-            .rating_star_holder .star:nth-child(3).active{
+            .rating_star_holder .star:nth-child(3).active,
+            .rating_star_holder .star:nth-child(3).selected{
                 background-color: #ff7800;
             }
-            .rating_star_holder .star:nth-child(4).active{
+            .rating_star_holder .star:nth-child(4).active,
+            .rating_star_holder .star:nth-child(4).selected{
                 background-color: #ffba00;
             }
-            .rating_star_holder .star:nth-child(5).active{
+            .rating_star_holder .star:nth-child(5).active,
+            .rating_star_holder .star:nth-child(5).selected{
                 background-color: #edd614;
             }
-            .rating_star_holder .star:nth-child(6).active{
+            .rating_star_holder .star:nth-child(6).active,
+            .rating_star_holder .star:nth-child(6).selected{
                 background-color: #9acd32;
             }
-            .rating_star_holder .star:nth-child(7).active{
+            .rating_star_holder .star:nth-child(7).active,
+            .rating_star_holder .star:nth-child(7).selected{
                 background-color: #5ba829;
             }
-            .rating_star_holder .star:nth-child(8).active{
+            .rating_star_holder .star:nth-child(8).active,
+            .rating_star_holder .star:nth-child(8).selected{
                 background-color: #3f7e00;
             }
-            .rating_star_holder .star:nth-child(9).active{
+            .rating_star_holder .star:nth-child(9).active,
+            .rating_star_holder .star:nth-child(9).selected{
                 background-color: #305d02;
             }
             .rating_value{
@@ -551,16 +560,16 @@
                     <p class="title">Write a review for Cafe Coffee Day</p>
                     <p class="rating_title">Your rating</p>
                     <div class="rating_star_holder">
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="star"></div>
-                        <div class="rating_value">2.5</div>
+                        <div class="star" data-count="1"></div>
+                        <div class="star" data-count="2"></div>
+                        <div class="star" data-count="3"></div>
+                        <div class="star" data-count="4"></div>
+                        <div class="star" data-count="5"></div>
+                        <div class="star" data-count="6"></div>
+                        <div class="star" data-count="7"></div>
+                        <div class="star" data-count="8"></div>
+                        <div class="star" data-count="9"></div>
+                        <div class="rating_value">-</div>
                     </div>
                     <div class="review_text_holder">
                         <textarea rows="4" cols="150" placeholder="Tip: A great review covers food, service, and ambiance. Got recommendations for your favorite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :) "></textarea>
@@ -929,6 +938,7 @@
         $(".tab_accord_wrapper").tab2accordion();
 
         (function(){
+            //Hide and show of panel
             $(".user_shownPanel").on('click', function(){
                 $(".add_review").addClass('showPanel');
             });
@@ -936,18 +946,25 @@
                 $(".add_review").removeClass('showPanel');
             });
 
-//            $(".star").on('hover', function(){
-//                $('.star').prevAll().addClass("active")
-//            });
-
+            //Rating Animation on hover
             $(".star").hover(function(){
-                $(this).prevAll().addClass("active")
-                $(this).addClass("active")
+                $(this).prevAll().addClass("active");
+                $(this).addClass("active");
+                var c= $(this).attr('data-count');
+                $(".rating_value").html((c*0.5).toFixed(1));
+
             },function(){
-                $( this ).prevAll().removeClass("active")
-                $(this).removeClass("active")
+                $( this ).prevAll().removeClass("active");
+                $(this).removeClass("active");
             });
 
+            $(".star").on('click', function (){
+                $(".star").removeClass("selected")
+                $(this).prevAll().addClass("selected")
+                $(this).addClass("selected")
+                var c= $(this).attr('data-count');
+                $(".rating_value").html((c*0.5).toFixed(1));
+            });
         })();
     </script>
     </body>
